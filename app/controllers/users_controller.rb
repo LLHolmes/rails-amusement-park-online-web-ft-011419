@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :current_user, only: [:show, :index]
+  before_action :current_user, only: [:show]
+  before_action :require_login, only: [:show]
 
   def new
     @user = User.new
@@ -14,10 +15,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    return redirect_to root_path unless logged_in?
+    @user = User.find(params[:id])
+    @notice = params[:notice] if params[:notice]
   end
 
   def index
+    @users = User.all
     return redirect_to user_path(current_user) unless current_user.admin
   end
 

@@ -8,7 +8,7 @@ class Ride < ActiveRecord::Base
       self.user.nausea += self.attraction.nausea_rating
       self.user.tickets -= self.attraction.tickets
       self.user.save
-      "I hope you enjoyed riding the #{self.attraction.name}!"
+      "Thanks for riding the #{self.attraction.name}!"
     else
       if !enough_tickets && !tall_enough
         ("Sorry." + ticket_message + height_message)
